@@ -1,153 +1,426 @@
-
-<!DOCTYPE html>
+<!doctype html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AutoPro IA - Votre assistant intelligent</title>
-<meta name="description" content="Gagnez du temps et développez votre activité grâce à l'intelligence artificielle.">
-<style>
-* { box-sizing: border-box; }
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  color: #17251f;
-  background: #f5f8f6;
-}
-header {
-  background: #102b21;
-  color: white;
-  padding: 22px 8%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-.logo { font-size: 24px; font-weight: bold; }
-.logo span { color: #6ee7a2; }
-.hero {
-  padding: 85px 8%;
-  text-align: center;
-  background: linear-gradient(135deg,#102b21,#1c5940);
-  color: white;
-}
-.hero h1 { font-size: clamp(34px,6vw,56px); }
-.hero p {
-  max-width: 650px;
-  margin: 20px auto;
-  line-height: 1.7;
-  font-size: 18px;
-}
-.btn {
-  display: inline-block;
-  background: #6ee7a2;
-  color: #102b21;
-  text-decoration: none;
-  padding: 16px 25px;
-  border-radius: 8px;
-  font-weight: bold;
-  margin-top: 15px;
-}
-section { padding: 55px 8%; text-align: center; }
-h2 { font-size: 30px; }
-.cards {
-  display: grid;
-  grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
-  gap: 20px;
-  margin-top: 30px;
-}
-.card {
-  background: white;
-  padding: 25px;
-  border-radius: 12px;
-  box-shadow: 0 3px 15px #0000000c;
-}
-.card h3 { color: #1c754b; }
-.contact {
-  background: #e7f4eb;
-  padding: 55px 8%;
-  text-align: center;
-}
-footer {
-  background: #102b21;
-  color: white;
-  text-align: center;
-  padding: 25px;
-  font-size: 13px;
-}
-</style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0b1110">
+  <meta name="description" content="AutoPro IA aide les entreprises à automatiser les tâches répétitives, organiser leurs demandes clients et suivre leurs prospects.">
+  <title>AutoPro IA — Automatisez le répétitif. Concentrez-vous sur l’essentiel.</title>
+  <style>
+    :root{
+      --bg:#0b1110;--bg2:#101a17;--panel:#121e1a;--panel2:#172520;
+      --text:#f2f7f4;--muted:#a7b8b0;--line:rgba(216,245,229,.12);
+      --green:#8cf0b6;--green2:#3ddc84;--blue:#83c7ff;
+      --radius:22px;--max:1160px;--shadow:0 24px 80px rgba(0,0,0,.28)
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.6}
+    a{color:inherit;text-decoration:none}
+    button,input,textarea,select{font:inherit}
+    button,a{ -webkit-tap-highlight-color:transparent}
+    .wrap{width:min(var(--max),calc(100% - 40px));margin-inline:auto}
+    .topbar{position:sticky;top:0;z-index:20;background:rgba(11,17,16,.82);backdrop-filter:blur(18px);border-bottom:1px solid var(--line)}
+    .nav{height:78px;display:flex;align-items:center;justify-content:space-between;gap:24px}
+    .brand{display:inline-flex;align-items:center;gap:11px;font-size:21px;font-weight:800;letter-spacing:-.7px}
+    .brandmark{width:35px;height:35px;display:grid;place-items:center;border-radius:12px;color:#07130c;background:linear-gradient(135deg,var(--green),#4bdc91);box-shadow:0 0 28px rgba(91,230,151,.18)}
+    .brandmark svg{width:21px;height:21px}
+    .brand em{font-style:normal;color:var(--green)}
+    .navlinks{display:flex;align-items:center;gap:28px;color:#c3d0ca;font-size:14px}
+    .navlinks a:hover{color:var(--green)}
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;padding:13px 19px;border:1px solid transparent;border-radius:12px;font-weight:750;font-size:14px;transition:transform .18s ease,background .18s ease,border-color .18s ease;cursor:pointer}
+    .btn:hover{transform:translateY(-2px)}
+    .btn-primary{background:var(--green);color:#07130c;box-shadow:0 8px 30px rgba(95,231,153,.12)}
+    .btn-primary:hover{background:#b0f8cb}
+    .btn-ghost{border-color:var(--line);background:rgba(255,255,255,.025);color:var(--text)}
+    .btn-ghost:hover{border-color:rgba(140,240,182,.5)}
+    .menu-toggle{display:none;background:transparent;border:1px solid var(--line);color:var(--text);border-radius:10px;padding:9px}
+    .hero{position:relative;overflow:hidden;padding:88px 0 74px}
+    .hero:before{content:"";position:absolute;width:620px;height:620px;right:-140px;top:-180px;background:radial-gradient(circle,rgba(48,201,119,.13),transparent 66%);pointer-events:none}
+    .hero-grid{display:grid;grid-template-columns:1.02fr .98fr;align-items:center;gap:56px;position:relative}
+    .eyebrow{display:inline-flex;align-items:center;gap:9px;border:1px solid rgba(140,240,182,.22);background:rgba(140,240,182,.06);padding:7px 12px;border-radius:999px;color:var(--green);font-size:12px;font-weight:750;letter-spacing:.08em;text-transform:uppercase}
+    .dot{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 12px var(--green)}
+    h1{font-size:clamp(42px,5.3vw,68px);line-height:1.04;letter-spacing:-.055em;margin:24px 0 22px;max-width:720px}
+    h1 span{color:var(--green)}
+    .hero-copy{font-size:18px;line-height:1.75;color:var(--muted);max-width:590px;margin:0}
+    .hero-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
+    .microproof{display:flex;align-items:center;gap:12px;margin-top:27px;color:#9fb0a7;font-size:12px}
+    .avatars{display:flex}
+    .avatar{display:grid;place-items:center;width:27px;height:27px;margin-left:-6px;border:2px solid var(--bg);border-radius:50%;background:#233b30;color:#d6fbe4;font-size:10px;font-weight:800}
+    .avatar:first-child{margin-left:0}
+    .hero-art{position:relative;min-width:0}
+    .dashboard{position:relative;border:1px solid rgba(191,238,210,.17);border-radius:26px;padding:18px;background:linear-gradient(145deg,rgba(24,42,34,.98),rgba(13,23,19,.98));box-shadow:var(--shadow);transform:rotate(1deg)}
+    .dash-head{display:flex;align-items:center;justify-content:space-between;padding:3px 2px 17px;border-bottom:1px solid var(--line)}
+    .dash-title{font-weight:750;font-size:13px}
+    .dash-sub{color:var(--muted);font-size:11px;margin-top:2px}
+    .live{display:inline-flex;align-items:center;gap:6px;color:var(--green);font-size:10px;background:rgba(140,240,182,.08);border-radius:999px;padding:6px 9px}
+    .metric-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:14px 0}
+    .metric{padding:13px 12px;border-radius:14px;background:rgba(255,255,255,.035);border:1px solid var(--line)}
+    .metric label{display:block;color:#a8bbb0;font-size:10px}
+    .metric strong{display:block;font-size:23px;letter-spacing:-1px;margin:3px 0}
+    .metric small{font-size:10px;color:var(--green)}
+    .flow-card{border:1px solid var(--line);border-radius:16px;padding:15px;background:rgba(4,10,7,.28)}
+    .flow-title{font-size:12px;font-weight:750;margin-bottom:13px}
+    .flow-step{display:flex;align-items:center;gap:10px;padding:10px 11px;border:1px solid var(--line);border-radius:12px;background:rgba(255,255,255,.025);font-size:11px;margin-bottom:8px}
+    .flow-step:last-child{margin-bottom:0}
+    .flow-icon{width:30px;height:30px;flex:none;display:grid;place-items:center;border-radius:9px;background:rgba(140,240,182,.1);color:var(--green)}
+    .flow-step strong{display:block;font-size:11px}
+    .flow-step span{display:block;color:#8ea198;font-size:10px}
+    .check{margin-left:auto;color:var(--green);font-weight:900}
+    .floating-note{position:absolute;right:-20px;bottom:27px;padding:13px 15px;border:1px solid rgba(140,240,182,.2);border-radius:14px;background:#14241c;box-shadow:0 15px 40px rgba(0,0,0,.28);font-size:11px;display:flex;align-items:center;gap:10px}
+    .floating-note strong{display:block;font-size:12px}
+    .floating-note span{color:var(--muted)}
+    .floating-check{width:31px;height:31px;display:grid;place-items:center;border-radius:10px;background:var(--green);color:#06120b;font-weight:900}
+    .trust-strip{border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:rgba(255,255,255,.015)}
+    .trust-inner{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:23px 0;color:#9eafa6;font-size:12px}
+    .trust-items{display:flex;flex-wrap:wrap;gap:22px;color:#d2ded7;font-weight:650}
+    section{padding:88px 0}
+    .section-head{max-width:690px;margin:0 auto 42px;text-align:center}
+    .kicker{color:var(--green);font-size:12px;font-weight:800;letter-spacing:.13em;text-transform:uppercase}
+    h2{font-size:clamp(30px,4vw,44px);line-height:1.14;letter-spacing:-.04em;margin:13px 0 15px}
+    .section-head p{margin:0;color:var(--muted);font-size:16px}
+    .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:17px}
+    .card{padding:25px;border:1px solid var(--line);border-radius:var(--radius);background:linear-gradient(155deg,rgba(23,37,31,.8),rgba(15,24,20,.78));transition:transform .2s ease,border-color .2s ease}
+    .card:hover{transform:translateY(-4px);border-color:rgba(140,240,182,.35)}
+    .iconbox{width:47px;height:47px;display:grid;place-items:center;border:1px solid rgba(140,240,182,.17);border-radius:14px;background:rgba(140,240,182,.07);color:var(--green)}
+    .iconbox svg{width:23px;height:23px}
+    .card h3{font-size:19px;letter-spacing:-.02em;margin:20px 0 8px}
+    .card p{color:var(--muted);font-size:14px;margin:0 0 17px}
+    .text-link{display:inline-flex;align-items:center;gap:7px;color:var(--green);font-weight:750;font-size:13px}
+    .split{display:grid;grid-template-columns:.95fr 1.05fr;gap:64px;align-items:center}
+    .split-copy h2{margin-top:14px}
+    .split-copy p{color:var(--muted)}
+    .benefits{display:grid;gap:14px;margin-top:25px}
+    .benefit{display:flex;gap:12px;align-items:flex-start}
+    .benefit-check{width:23px;height:23px;flex:none;display:grid;place-items:center;background:rgba(140,240,182,.1);color:var(--green);border-radius:8px;font-size:12px;font-weight:900}
+    .benefit strong{display:block;font-size:14px}
+    .benefit span{display:block;color:var(--muted);font-size:13px;margin-top:2px}
+    .steps-panel{border:1px solid var(--line);border-radius:25px;padding:25px;background:linear-gradient(150deg,#14221b,#0e1713);box-shadow:var(--shadow)}
+    .steps-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:23px}
+    .steps-top strong{font-size:14px}
+    .steps-top span{font-size:11px;color:var(--green);background:rgba(140,240,182,.08);padding:6px 9px;border-radius:999px}
+    .step{display:grid;grid-template-columns:42px 1fr auto;gap:13px;align-items:center;padding:15px 0;border-top:1px solid var(--line)}
+    .step-number{width:38px;height:38px;display:grid;place-items:center;border-radius:12px;background:rgba(140,240,182,.08);color:var(--green);font-weight:800;font-size:12px}
+    .step strong{font-size:13px;display:block}
+    .step p{font-size:12px;color:var(--muted);margin:3px 0 0}
+    .step-tag{font-size:10px;color:#b4c6bc}
+    .revenue{background:linear-gradient(180deg,rgba(21,37,29,.5),rgba(11,17,16,0))}
+    .offer-card{position:relative;overflow:hidden}
+    .offer-card.featured{border-color:rgba(140,240,182,.45);background:linear-gradient(150deg,rgba(33,70,48,.55),rgba(15,24,20,.92))}
+    .offer-label{display:inline-flex;padding:5px 9px;border-radius:999px;background:rgba(140,240,182,.1);color:var(--green);font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.08em}
+    .offer-card h3{margin-top:15px}
+    .offer-card .price{font-size:27px;letter-spacing:-1px;font-weight:850;margin:14px 0 3px}
+    .offer-card .price small{font-size:12px;letter-spacing:0;color:var(--muted);font-weight:500}
+    .offer-card ul{list-style:none;margin:20px 0 23px;padding:0;display:grid;gap:10px;color:#c5d2cb;font-size:13px}
+    .offer-card li{display:flex;gap:9px}
+    .offer-card li:before{content:"✓";color:var(--green);font-weight:900}
+    .offer-card .btn{width:100%}
+    .note{max-width:800px;margin:23px auto 0;color:#8fa198;text-align:center;font-size:12px}
+    .cta-band{padding:0 0 88px}
+    .cta-inner{position:relative;overflow:hidden;display:flex;align-items:center;justify-content:space-between;gap:28px;padding:38px 42px;border:1px solid rgba(140,240,182,.22);border-radius:25px;background:radial-gradient(circle at 90% 0,rgba(57,211,124,.15),transparent 42%),linear-gradient(135deg,#172a20,#101a15)}
+    .cta-inner h2{font-size:clamp(27px,3.3vw,38px);max-width:650px;margin:0 0 10px}
+    .cta-inner p{color:var(--muted);margin:0}
+    .contact-grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:45px}
+    .contact-info p{color:var(--muted)}
+    .contact-tip{padding:17px;border:1px solid var(--line);border-radius:15px;background:rgba(255,255,255,.02);font-size:13px;color:var(--muted);margin-top:22px}
+    .contact-form{padding:24px;border:1px solid var(--line);border-radius:22px;background:var(--panel)}
+    .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+    .field{display:grid;gap:7px}
+    .field.full{grid-column:1/-1}
+    .field label{font-size:12px;color:#d4e1d9;font-weight:700}
+    .field input,.field select,.field textarea{width:100%;border:1px solid var(--line);background:#0d1511;color:var(--text);border-radius:11px;padding:12px 13px;outline:none}
+    .field input:focus,.field select:focus,.field textarea:focus{border-color:rgba(140,240,182,.55);box-shadow:0 0 0 3px rgba(140,240,182,.07)}
+    .field textarea{min-height:105px;resize:vertical}
+    .form-note{color:#8fa198;font-size:11px;margin:12px 0 0}
+    .form-status{display:none;margin-top:14px;padding:12px;border-radius:10px;background:rgba(140,240,182,.08);color:var(--green);font-size:13px}
+    footer{border-top:1px solid var(--line);padding:27px 0 35px}
+    .footer-inner{display:flex;justify-content:space-between;align-items:center;gap:20px;color:#8fa198;font-size:12px}
+    .footer-links{display:flex;gap:18px;flex-wrap:wrap}
+    .footer-links a:hover{color:var(--green)}
+    .legal{font-size:11px;color:#6f8278;max-width:760px;margin-top:15px}
+    @media(max-width:900px){
+      .hero-grid{grid-template-columns:1fr;gap:45px}.hero-copy{max-width:700px}.hero-art{max-width:620px;width:100%;margin:auto}
+      .split{grid-template-columns:1fr;gap:35px}.cards{grid-template-columns:repeat(2,1fr)}.contact-grid{grid-template-columns:1fr;gap:25px}
+      .trust-inner{align-items:flex-start;flex-direction:column}.cta-inner{align-items:flex-start;flex-direction:column}
+    }
+    @media(max-width:640px){
+      .wrap{width:min(var(--max),calc(100% - 28px))}.nav{height:68px}.navlinks{display:none;position:absolute;top:68px;left:0;right:0;padding:18px 22px 22px;background:#0e1713;border-bottom:1px solid var(--line);flex-direction:column;align-items:stretch;gap:18px}.navlinks.open{display:flex}.navlinks .btn{width:100%}.menu-toggle{display:inline-flex}.nav>.btn{display:none}
+      .hero{padding:60px 0 55px}h1{font-size:43px}.hero-copy{font-size:16px}.hero-actions .btn{width:100%}.dashboard{padding:12px;border-radius:20px}.metric-grid{gap:6px}.metric{padding:10px 8px}.metric strong{font-size:19px}.floating-note{right:3px;bottom:-25px}.hero-art{margin-bottom:30px}
+      section{padding:65px 0}.cards{grid-template-columns:1fr}.card{padding:22px}.section-head{margin-bottom:30px}.steps-panel{padding:18px}.step{grid-template-columns:36px 1fr;gap:10px}.step-tag{display:none}.cta-band{padding-bottom:65px}.cta-inner{padding:27px 22px}.form-grid{grid-template-columns:1fr}.field.full{grid-column:auto}.contact-form{padding:18px}.footer-inner{align-items:flex-start;flex-direction:column}.trust-items{gap:12px 18px}
+    }
+    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{transition:none!important}}
+  </style>
 </head>
 <body>
+  <header class="topbar">
+    <div class="wrap nav">
+      <a class="brand" href="#accueil" aria-label="AutoPro IA, accueil">
+        <span class="brandmark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 15.5 12 4l7 11.5"/><path d="M8 12h8"/><path d="M7 18h10"/></svg></span>
+        <span>AutoPro <em>IA</em></span>
+      </a>
+      <nav class="navlinks" id="navlinks" aria-label="Navigation principale">
+        <a href="#solutions">Solutions</a>
+        <a href="#fonctionnement">Fonctionnement</a>
+        <a href="#offres">Offres</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <a class="btn btn-primary" href="#contact">Parler de mon projet <span aria-hidden="true">↗</span></a>
+      <button class="menu-toggle" id="menuToggle" aria-label="Ouvrir le menu" aria-expanded="false">☰</button>
+    </div>
+  </header>
 
-<header>
-  <div class="logo">AutoPro <span>IA</span></div>
-  <div>Solutions intelligentes</div>
-</header>
+  <main>
+    <section class="hero" id="accueil">
+      <div class="wrap hero-grid">
+        <div>
+          <div class="eyebrow"><span class="dot"></span> Des processus plus intelligents</div>
+          <h1>Moins de tâches répétitives.<br><span>Plus de croissance.</span></h1>
+          <p class="hero-copy">AutoPro IA aide les entreprises à simplifier leurs opérations grâce à des automatisations utiles : demandes clients, suivi commercial et tâches répétitives.</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#solutions">Découvrir les solutions <span aria-hidden="true">→</span></a>
+            <a class="btn btn-ghost" href="#fonctionnement">Comment ça marche</a>
+          </div>
+          <div class="microproof">
+            <div class="avatars" aria-hidden="true"><span class="avatar">IA</span><span class="avatar">↗</span><span class="avatar">✓</span></div>
+            <span>Des solutions pensées pour être simples, utiles et évolutives.</span>
+          </div>
+        </div>
+        <div class="hero-art" aria-label="Illustration d'un tableau de bord d'automatisation">
+          <div class="dashboard">
+            <div class="dash-head">
+              <div><div class="dash-title">Centre d'automatisation</div><div class="dash-sub">Vue d'ensemble de votre activité</div></div>
+              <span class="live"><span class="dot"></span> Aperçu produit</span>
+            </div>
+            <div class="metric-grid">
+              <div class="metric"><label>Demandes traitées</label><strong>+24%</strong><small>↗ Exemple visuel</small></div>
+              <div class="metric"><label>Tâches répétitives</label><strong>−6 h</strong><small>Temps potentiel</small></div>
+              <div class="metric"><label>Suivi client</label><strong>Centralisé</strong><small>En un seul endroit</small></div>
+            </div>
+            <div class="flow-card">
+              <div class="flow-title">Exemple de scénario automatisé</div>
+              <div class="flow-step"><div class="flow-icon">✉</div><div><strong>Nouvelle demande reçue</strong><span>Formulaire ou e-mail</span></div><span class="check">✓</span></div>
+              <div class="flow-step"><div class="flow-icon">↗</div><div><strong>Demande classée</strong><span>Informations organisées</span></div><span class="check">✓</span></div>
+              <div class="flow-step"><div class="flow-icon">✓</div><div><strong>Réponse préparée</strong><span>Validation selon vos règles</span></div><span class="check">✓</span></div>
+            </div>
+          </div>
+          <div class="floating-note"><div class="floating-check">✓</div><div><strong>Un flux plus clair</strong><span>Moins de manipulations manuelles</span></div></div>
+        </div>
+      </div>
+    </section>
 
-<div class="hero">
-  <h1>Gagnez du temps. Développez votre activité.</h1>
-  <p>
-    AutoPro IA aide les artisans et les petites entreprises
-    à mieux gérer leurs demandes clients grâce à des
-    solutions simples d'intelligence artificielle.
-  </p>
-  <a class="btn" href="#contact">Découvrir nos solutions</a>
-</div>
+    <div class="trust-strip">
+      <div class="wrap trust-inner">
+        <span>Des automatisations adaptées à vos méthodes de travail</span>
+        <div class="trust-items"><span>Demandes clients</span><span>Organisation</span><span>Suivi commercial</span><span>Assistants IA</span></div>
+      </div>
+    </div>
 
-<section>
-  <h2>Nos solutions pour les professionnels</h2>
-  <p>Moins de tâches répétitives, plus de temps pour vos clients.</p>
+    <section id="solutions">
+      <div class="wrap">
+        <div class="section-head">
+          <div class="kicker">Nos solutions</div>
+          <h2>La technologie doit vous simplifier la vie.</h2>
+          <p>Des outils ciblés pour réduire les tâches répétitives, mieux suivre les demandes et libérer du temps pour votre activité.</p>
+        </div>
+        <div class="cards">
+          <article class="card">
+            <div class="iconbox"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.4 8.4 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.4 8.4 0 0 1-3.8-.9L3 21l1.9-5.7a8.4 8.4 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.4 8.4 0 0 1 3.8-.9h.5a8.5 8.5 0 0 1 8 8z"/></svg></div>
+            <h3>Demandes clients</h3>
+            <p>Centralisez les demandes entrantes, classez les informations importantes et préparez des réponses cohérentes.</p>
+            <a class="text-link" href="#contact" data-service="Demandes clients">Parler de ce besoin <span>→</span></a>
+          </article>
+          <article class="card">
+            <div class="iconbox"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M12 7v5l3 2"/><path d="m16.5 4.5 2 2"/></svg></div>
+            <h3>Suivi commercial</h3>
+            <p>Organisez vos prospects, gardez une trace des échanges et repérez plus facilement les prochaines actions.</p>
+            <a class="text-link" href="#contact" data-service="Suivi commercial">Parler de ce besoin <span>→</span></a>
+          </article>
+          <article class="card">
+            <div class="iconbox"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v3m0 12v3M3 12h3m12 0h3"/><circle cx="12" cy="12" r="5"/><path d="m16 8 2-2m-12 12 2-2"/></svg></div>
+            <h3>Assistants IA</h3>
+            <p>Structurez les questions fréquentes et préparez des réponses ou des synthèses à valider selon vos besoins.</p>
+            <a class="text-link" href="#contact" data-service="Assistants IA">Parler de ce besoin <span>→</span></a>
+          </article>
+          <article class="card">
+            <div class="iconbox"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v14H4z"/><path d="M8 9h8M8 13h5"/><path d="m15 16 2 2 4-5"/></svg></div>
+            <h3>Documents & rapports</h3>
+            <p>Transformez des données structurées en synthèses et rapports récurrents, avec moins de copier-coller.</p>
+            <a class="text-link" href="#contact" data-service="Documents et rapports">Parler de ce besoin <span>→</span></a>
+          </article>
+          <article class="card">
+            <div class="iconbox"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="m7 14 4-4 4 3 6-7"/></svg></div>
+            <h3>Tableaux de bord</h3>
+            <p>Rassemblez les indicateurs utiles pour mieux comprendre l'activité et prendre des décisions plus éclairées.</p>
+            <a class="text-link" href="#contact" data-service="Tableaux de bord">Parler de ce besoin <span>→</span></a>
+          </article>
+          <article class="card">
+            <div class="iconbox"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="3"/><path d="M8 9h8M8 13h5"/><path d="m16 16 2 2 3-4"/></svg></div>
+            <h3>Automatisations sur mesure</h3>
+            <p>Reliez les outils que vous utilisez déjà et simplifiez un processus précis, étape par étape.</p>
+            <a class="text-link" href="#contact" data-service="Automatisation sur mesure">Parler de ce besoin <span>→</span></a>
+          </article>
+        </div>
+      </div>
+    </section>
 
-  <div class="card">
-  <svg width="38" height="38" viewBox="0 0 24 24"
-       fill="none" stroke="#23865B" stroke-width="1.6"
-       stroke-linecap="round" stroke-linejoin="round">
-    <path d="M21 11.5a8.4 8.4 0 0 1-.9 3.8
-    8.5 8.5 0 0 1-7.6 4.7 8.4 8.4 0 0 1-3.8-.9
-    L3 21l1.9-5.7a8.4 8.4 0 0 1-.9-3.8
-    8.5 8.5 0 0 1 4.7-7.6 8.4 8.4 0 0 1 3.8-.9h.5
-    a8.5 8.5 0 0 1 8 8z"/>
-  </svg>
-  <h3>Gestion des demandes</h3>
-  <p>Centralisez les demandes de devis et les prises de contact.</p>
-</div>
+    <section id="fonctionnement">
+      <div class="wrap split">
+        <div class="split-copy">
+          <div class="kicker">Une méthode claire</div>
+          <h2>Utile d'abord. Automatisé ensuite.</h2>
+          <p>Chaque entreprise fonctionne différemment. Nous commençons par identifier une tâche répétitive, puis nous cherchons la façon la plus simple et raisonnable de l'améliorer.</p>
+          <div class="benefits">
+            <div class="benefit"><div class="benefit-check">✓</div><div><strong>Un problème concret</strong><span>On part d'une tâche qui prend du temps, pas d'une technologie à vendre à tout prix.</span></div></div>
+            <div class="benefit"><div class="benefit-check">✓</div><div><strong>Des outils adaptés</strong><span>Priorité aux outils déjà utilisés et aux solutions gratuites lorsque c'est possible.</span></div></div>
+            <div class="benefit"><div class="benefit-check">✓</div><div><strong>Un fonctionnement vérifiable</strong><span>On teste le scénario avant de le confier à une utilisation réelle.</span></div></div>
+          </div>
+        </div>
+        <div class="steps-panel">
+          <div class="steps-top"><strong>De l'idée à un processus plus simple</strong><span>4 étapes</span></div>
+          <div class="step"><div class="step-number">01</div><div><strong>Comprendre</strong><p>Identifier le besoin et les outils existants.</p></div><span class="step-tag">Cadrage</span></div>
+          <div class="step"><div class="step-number">02</div><div><strong>Concevoir</strong><p>Définir un flux simple et les règles de contrôle.</p></div><span class="step-tag">Plan</span></div>
+          <div class="step"><div class="step-number">03</div><div><strong>Tester</strong><p>Vérifier les cas habituels et les erreurs possibles.</p></div><span class="step-tag">Essai</span></div>
+          <div class="step"><div class="step-number">04</div><div><strong>Améliorer</strong><p>Suivre les résultats et ajuster si nécessaire.</p></div><span class="step-tag">Suivi</span></div>
+        </div>
+      </div>
+    </section>
 
-<div class="card">
-  <svg width="38" height="38" viewBox="0 0 24 24"
-       fill="none" stroke="#23865B" stroke-width="1.6"
-       stroke-linecap="round" stroke-linejoin="round">
-    <path d="M12 3v3m0 12v3M3 12h3m12 0h3"/>
-    <circle cx="12" cy="12" r="5"/>
-    <path d="m16 8 2-2m-12 12 2-2"/>
-  </svg>
-  <h3>Assistance intelligente</h3>
-  <p>Préparez des réponses personnalisées aux questions fréquentes.</p>
-</div>
+    <section class="revenue" id="offres">
+      <div class="wrap">
+        <div class="section-head">
+          <div class="kicker">Nos offres</div>
+          <h2>Commencer simplement, évoluer ensuite.</h2>
+          <p>Trois façons de travailler ensemble. Les tarifs définitifs seront fixés en fonction du périmètre et des coûts réels de chaque solution.</p>
+        </div>
+        <div class="cards">
+          <article class="card offer-card">
+            <span class="offer-label">Autonomie</span>
+            <h3>Outils numériques</h3>
+            <p>Des ressources prêtes à adapter à votre organisation.</p>
+            <div class="price">À partir de 19 € <small>/ achat unique</small></div>
+            <ul><li>Modèles et kits numériques</li><li>Instructions d'utilisation</li><li>Accès après achat à organiser</li></ul>
+            <a class="btn btn-ghost" href="#contact" data-service="Outils numériques">Être informé du lancement</a>
+          </article>
+          <article class="card offer-card featured">
+            <span class="offer-label">Accompagnement récurrent</span>
+            <h3>Automatisation suivie</h3>
+            <p>Un système défini, documenté et amélioré selon un périmètre convenu.</p>
+            <div class="price">À partir de 49 € <small>/ mois, à confirmer</small></div>
+            <ul><li>Un besoin clairement défini</li><li>Suivi selon l'offre choisie</li><li>Coûts d'outils précisés à l'avance</li></ul>
+            <a class="btn btn-primary" href="#contact" data-service="Abonnement d'automatisation">Discuter d'un abonnement</a>
+          </article>
+          <article class="card offer-card">
+            <span class="offer-label">Projet spécifique</span>
+            <h3>Installation sur mesure</h3>
+            <p>Une automatisation conçue pour un processus particulier.</p>
+            <div class="price">Sur devis <small>/ projet</small></div>
+            <ul><li>Analyse du besoin</li><li>Configuration et tests</li><li>Remise d'une documentation</li></ul>
+            <a class="btn btn-ghost" href="#contact" data-service="Installation sur mesure">Décrire mon projet</a>
+          </article>
+        </div>
+        <p class="note">Les prix affichés sont des pistes de positionnement, pas une promesse de prestation déjà disponible. Une offre ne doit être vendue qu'après validation de sa faisabilité, de son coût et de ses conditions.</p>
+      </div>
+    </section>
 
-<div class="card">
-  <svg width="38" height="38" viewBox="0 0 24 24"
-       fill="none" stroke="#23865B" stroke-width="1.6"
-       stroke-linecap="round" stroke-linejoin="round">
-    <path d="M3 3v18h18"/>
-    <path d="m7 14 4-4 4 3 6-7"/>
-  </svg>
-  <h3>Suivi des performances</h3>
-  <p>Organisez vos prospects et suivez vos opportunités.</p>
-</div>
+    <div class="cta-band">
+      <div class="wrap">
+        <div class="cta-inner">
+          <div><h2>Quelle tâche vous ferait gagner le plus de temps ?</h2><p>Décrivez votre besoin. Nous commencerons par chercher la solution la plus simple.</p></div>
+          <a class="btn btn-primary" href="#contact">Présenter mon besoin <span aria-hidden="true">→</span></a>
+        </div>
+      </div>
+    </div>
 
+    <section id="contact">
+      <div class="wrap contact-grid">
+        <div class="contact-info">
+          <div class="kicker">Contact</div>
+          <h2>Parlons de votre idée.</h2>
+          <p>Expliquez-nous ce que vous souhaitez simplifier dans votre activité. Ce formulaire prépare un message que vous pourrez copier et envoyer depuis votre messagerie.</p>
+          <div class="contact-tip"><strong style="color:var(--text)">Sans abonnement supplémentaire</strong><br>Cette version du site fonctionne sans serveur ni base de données. Le formulaire prépare votre demande dans le navigateur : il ne l'envoie pas automatiquement.</div>
+        </div>
+        <form class="contact-form" id="contactForm">
+          <div class="form-grid">
+            <div class="field"><label for="name">Votre nom</label><input id="name" name="name" autocomplete="name" required placeholder="Prénom et nom"></div>
+            <div class="field"><label for="company">Entreprise</label><input id="company" name="company" autocomplete="organization" placeholder="Nom de l'entreprise"></div>
+            <div class="field"><label for="email">Votre e-mail</label><input id="email" name="email" type="email" autocomplete="email" required placeholder="vous@entreprise.fr"></div>
+            <div class="field"><label for="service">Votre besoin</label><select id="service" name="service"><option>Je ne sais pas encore</option><option>Demandes clients</option><option>Suivi commercial</option><option>Assistants IA</option><option>Documents et rapports</option><option>Tableaux de bord</option><option>Automatisation sur mesure</option><option>Outils numériques</option><option>Abonnement d'automatisation</option><option>Installation sur mesure</option></select></div>
+            <div class="field full"><label for="message">Que souhaitez-vous automatiser ?</label><textarea id="message" name="message" required placeholder="Décrivez brièvement la tâche ou le problème…"></textarea></div>
+            <div class="field full"><button class="btn btn-primary" type="submit">Préparer mon message <span aria-hidden="true">↗</span></button></div>
+          </div>
+          <p class="form-note">Aucune donnée n'est envoyée ou enregistrée par ce formulaire. Après validation, vous pourrez copier le message généré.</p>
+          <div class="form-status" id="formStatus" role="status" aria-live="polite"></div>
+        </form>
+      </div>
+    </section>
+  </main>
 
+  <footer>
+    <div class="wrap">
+      <div class="footer-inner">
+        <a class="brand" href="#accueil"><span class="brandmark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 15.5 12 4l7 11.5"/><path d="M8 12h8"/><path d="M7 18h10"/></svg></span><span>AutoPro <em>IA</em></span></a>
+        <div>© <span id="year"></span> AutoPro IA. Solutions numériques pour professionnels.</div>
+        <div class="footer-links"><a href="#solutions">Solutions</a><a href="#offres">Offres</a><a href="#contact">Contact</a></div>
+      </div>
+      <p class="legal">Les exemples et gains évoqués sur cette page sont illustratifs et ne constituent pas une garantie de résultat. Les tarifs sont indicatifs et doivent être confirmés avant toute vente. Les mentions légales, coordonnées de l'éditeur, conditions générales de vente et politique de confidentialité devront être complétées avant une commercialisation effective.</p>
+    </div>
+  </footer>
 
-<section class="contact" id="contact">
-  <h2>Prêt à gagner du temps ?</h2>
-  <p>Parlons de votre activité et de vos besoins.</p>
-  <a class="btn" href="mailto:REMPLACER_PAR_TON_EMAIL">
-    Demander des informations
-  </a>
-</section>
-
-<footer>
-  © 2026 AutoPro IA - Tous droits réservés.
-  <p>Site de présentation de solutions numériques pour professionnels.</p>
-</footer>
-
+  <script>
+    const menuToggle = document.getElementById('menuToggle');
+    const navlinks = document.getElementById('navlinks');
+    menuToggle.addEventListener('click', () => {
+      const open = navlinks.classList.toggle('open');
+      menuToggle.setAttribute('aria-expanded', String(open));
+      menuToggle.textContent = open ? '✕' : '☰';
+    });
+    navlinks.querySelectorAll('a').forEach(link => link.addEventListener('click', () => {
+      navlinks.classList.remove('open');
+      menuToggle.setAttribute('aria-expanded', 'false');
+      menuToggle.textContent = '☰';
+    }));
+    document.querySelectorAll('[data-service]').forEach(link => {
+      link.addEventListener('click', () => {
+        const select = document.getElementById('service');
+        select.value = link.getAttribute('data-service');
+      });
+    });
+    document.getElementById('year').textContent = new Date().getFullYear();
+    document.getElementById('contactForm').addEventListener('submit', async (event) => {
+      event.preventDefault();
+      const form = event.currentTarget;
+      const data = new FormData(form);
+      const body = [
+        'Demande de contact — AutoPro IA',
+        '',
+        'Nom : ' + (data.get('name') || ''),
+        'Entreprise : ' + (data.get('company') || ''),
+        'E-mail : ' + (data.get('email') || ''),
+        'Besoin : ' + (data.get('service') || ''),
+        '',
+        'Message :',
+        (data.get('message') || '')
+      ].join('\n');
+      const status = document.getElementById('formStatus');
+      try {
+        await navigator.clipboard.writeText(body);
+        status.textContent = 'Votre message a été copié. Collez-le dans votre messagerie pour l’envoyer.';
+      } catch (err) {
+        const area = document.createElement('textarea');
+        area.value = body;
+        area.setAttribute('readonly', '');
+        area.style.position = 'fixed';
+        area.style.opacity = '0';
+        document.body.appendChild(area);
+        area.select();
+        const copied = document.execCommand('copy');
+        area.remove();
+        status.textContent = copied
+          ? 'Votre message a été copié. Collez-le dans votre messagerie pour l’envoyer.'
+          : 'Votre message est prêt : ' + body;
+      }
+      status.style.display = 'block';
+    });
+  </script>
 </body>
 </html>
